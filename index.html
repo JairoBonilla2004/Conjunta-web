@@ -1,16 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca Digital</title>
+  <link rel="stylesheet" href="styles.css">
+  
 </head>
 <body>
-<<<<<<< HEAD
-    <h1></h1>
-=======
-    <h1>d</h1>
->>>>>>> rama-Reishel
+  <h1>Gestión de Biblioteca Digital</h1>
+  <input type="text" id="busqueda" placeholder="Buscar libros por título, autor o género...">
+  <button onclick="buscarLibros()">Buscar</button>
+  
+  <h2>Libros Disponibles</h2>
+  <div id="lista-libros" class="libros"></div>
+
+  <h2>Libros Prestados</h2>
+  <div id="lista-prestamos" class="libros"></div>
+
+  <script>
+    const libros = [
+      { id: 1, titulo: "El principito", autor: "Antoine de Saint-Exupéry", genero: "Ficción", disponible: true },
+      { id: 2, titulo: "Cien años de soledad", autor: "Gabriel García Márquez", genero: "Realismo mágico", disponible: true },
+      { id: 3, titulo: "1984", autor: "George Orwell", genero: "Distopía", disponible: true }
+    ];
+
+    const prestamos = [];
+
+    const renderLibros = () => {
+      const listaLibros = document.getElementById("lista-libros");
+      const listaPrestamos = document.getElementById("lista-prestamos");
+
+      listaLibros.innerHTML = "";
+      listaPrestamos.innerHTML = "";
+
+      libros.forEach(libro => {
+        const div = document.createElement("div");
+        div.className = "libro";
+        div.innerHTML = `
+          <h3>${libro.titulo}</h3>
+          <p><strong>Autor:</strong> ${libro.autor}</p>
+          <p><strong>Género:</strong> ${libro.genero}</p>
+          <div class="acciones">
+            ${libro.disponible
+              ? `<button class="reservar" onclick="reservarLibro(${libro.id})">Reservar</button>`
+              : `<button class="devolver" onclick="devolverLibro(${libro.id})">Devolver</button>`
+            }
+          </div>
+        `;
+        if (libro.disponible) {
+          listaLibros.appendChild(div);
+        }
+      });
+
+      prestamos.forEach(libro => {
+        const div = document.createElement("div");
+        div.className = "libro";
+        div.innerHTML = `
+          <h3>${libro.titulo}</h3>
+          <p><strong>Autor:</strong> ${libro.autor}</p>
+          <p><strong>Género:</strong> ${libro.genero}</p>
+          <div class="acciones">
+            <button class="devolver" onclick="devolverLibro(${libro.id})">Devolver</button>
+          </div>
+        `;
+        listaPrestamos.appendChild(div);
+      });
+    };
+
+    const reservarLibro = (id) => {
+      const libro = libros.find(libro => libro.id === id);
+      if (libro && libro.disponible) {
+        libro.disponible = false;
+        prestamos.push(libro);
+        alert(`Has reservado "${libro.titulo}".`);
+        renderLibros();
+      }
+    };
+
+    const devolverLibro = (id) => {
+      const index = prestamos.findIndex(libro => libro.id === id);
+      if (index !== -1) {
+        const libro = prestamos.splice(index, 1)[0];
+        libro.disponible = true;
+        alert(`Has devuelto "${libro.titulo}".`);
+        renderLibros();
+      }
+    };
+
+    const buscarLibros = () => {
+      const busqueda = document.getElementById("busqueda").value.toLowerCase();
+      const resultados = libros.filter(libro =>
+        libro.titulo.toLowerCase().includes(busqueda) ||
+        libro.autor.toLowerCase().includes(busqueda) ||
+        libro.genero.toLowerCase().includes(busqueda)
+      );
+      if (resultados.length > 0) {
+        alert(`Se encontraron ${resultados.length} libro(s).`);
+      } else {
+        alert("No se encontraron libros.");
+      }
+    };
+
+    renderLibros();
+  </script>
 </body>
 </html>
