@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  h1, h2 {
+    color: #333;
+  }
+  .libros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .libro {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: calc(30% - 10px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .acciones button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .acciones .reservar {
+    background-color: #28a745;
+    color: #fff;
+  }
+  .acciones .devolver {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  input {
+    padding: 5px;
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
