@@ -1,7 +1,6 @@
 const libros = [
     { id: 1, titulo: "El principito", autor: "Antoine de Saint-Exupéry", genero: "Ficción", disponible: true },
     { id: 2, titulo: "Cien años de soledad", autor: "Gabriel García Márquez", genero: "Realismo mágico", disponible: true },
-    { id: 3, titulo: "1984", autor: "George Orwell", genero: "Distopía", disponible: true }
   ];
 
   const prestamos = [];
